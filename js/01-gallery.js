@@ -24,7 +24,6 @@ const containerGallary = document.querySelector('.gallery');
 const imgItems = galleryItems.map(({ preview, original, description }) =>
 `<div class="gallery__item">
 <a class="gallery__link" href="${original}"
-onclick="event.preventDefault()">
 <img
 class="gallery__image"
 src="${preview}"
@@ -33,6 +32,7 @@ alt="${description}"
 />
 </a>
 </div>`).join('');
+
 
 containerGallary.insertAdjacentHTML('beforeend', imgItems);
 
