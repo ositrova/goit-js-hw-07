@@ -35,11 +35,11 @@ containerGallary.insertAdjacentHTML('beforeend', imgItems);
 containerGallary.addEventListener('click', onclick);
 
 function onclick (elem) {
-
-    if (!elem.target.classList.gallery('item')) {
+  elem.preventDefault();
+    if (!elem.target.classList.contains('gallery__image')) {
         return;
     }
-elem.preventDefault();
+
 const currentImg = elem.target;
 const instance = basicLightbox.create(
     `<img src="${currentImg.dataset.source}" width="1000"/>`,
