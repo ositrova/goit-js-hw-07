@@ -32,35 +32,55 @@ import { galleryItems } from './gallery-items.js';
 
 // console.log(galleryItems);
 
-const containerGal = document.querySelector('.gallery');
+const galleryContainer = document.querySelector('.gallery');
 
-const imgItem = galleryItems.map(({ preview, original, description }) =>
+const galleryMarkup = galleryItems.reduce(
+  (acc, { preview, original, description }) =>
+    acc +
+    `<li class="gallery__item">
+        <a class="gallery__link" href="${original}">
+            <img
+            class="gallery__image"
+            src="${preview}"
+            alt="${description}"
+            />
+        </a>
+    </li>`,
+  '',
+);
 
-`<a class="gallery__item" href="${original}">
-<img class="gallery__image" src="${preview}" 
-data-source="${original}" alt="${description}"/>
-</a>
-`).join('');
-
-containerGal.insertAdjacentHTML('beforeend', imgItem);
-
-containerGal.addEventListener('click', openModal)
-
-function openModal (event) {
-    event.preventDefault();
-
-    if (!event.target.classList.contains('gallery__image')) {
-        return
-    }
-    
-    function closeModal(e) {
-        if (e.key === 'Escape') {
-          instance.close();
-          console.log(e.key);
-        }
-}}
+galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
 const lightbox = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
     captionsData: 'alt',
+    captionPosition: 'bottom',
   });
+
+  // const containerGal = document.querySelector('.gallery');
+
+  // const imgItem = galleryItems.map(({ preview, original, description }) =>
+  
+  // `<a class="gallery__item" href="${original}">
+  // <img class="gallery__image" src="${preview}" 
+  // data-source="${original}" alt="${description}"/>
+  // </a>
+  // `).join('');
+  
+  // containerGal.insertAdjacentHTML('beforeend', imgItem);
+  
+  // containerGal.addEventListener('click', openModal)
+  
+  // function openModal (event) {
+  //     event.preventDefault();
+  
+  //     if (!event.target.classList.contains('gallery__image')) {
+  //         return
+  //     }
+      
+  //     function closeModal(e) {
+  //         if (e.key === 'Escape') {
+  //           instance.close();
+  //           console.log(e.key);
+  //         }
+  // }}
